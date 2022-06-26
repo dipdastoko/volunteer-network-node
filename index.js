@@ -21,11 +21,7 @@ async function run() {
 
         const database = client.db('volunteer-network');
         const eventCollection = database.collection('events');
-
-        const doc = {
-            name: "Animal Shelter",
-            img: "https://i.ibb.co/C9TTxgQ/animal-Shelter.png"
-        }
+        const volunteerCollection = database.collection('volunteers');
 
         // const result = await eventCollection.insertOne(doc);
         // console.log(result);
@@ -35,7 +31,15 @@ async function run() {
             const cursor = eventCollection.find({});
             const result = await cursor.toArray();
             res.json(result);
+        });
+
+        // POST API
+        app.post('/volunteer', async (req, res) => {
+            const volunteer = req.body;
+            console.log(volunteer);
+            res.json(volunteer);
         })
+
 
     }
     finally {
