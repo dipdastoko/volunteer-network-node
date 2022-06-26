@@ -36,8 +36,9 @@ async function run() {
         // POST API
         app.post('/volunteer', async (req, res) => {
             const volunteer = req.body;
+            const result = await volunteerCollection.insertOne(volunteer);
             console.log(volunteer);
-            res.json(volunteer);
+            res.json(result);
         })
 
 
