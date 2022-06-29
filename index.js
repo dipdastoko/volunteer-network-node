@@ -23,9 +23,6 @@ async function run() {
         const eventCollection = database.collection('events');
         const volunteerCollection = database.collection('volunteers');
 
-        // const result = await eventCollection.insertOne(doc);
-        // console.log(result);
-
         // Get API
         app.get('/events', async (req, res) => {
             const cursor = eventCollection.find({});
@@ -33,13 +30,18 @@ async function run() {
             res.json(result);
         });
 
+        app.get('/allvolunteers', async (req, res) => {
+            const cursor = volunteerCollection.find({});
+            const result = await cursor.toArray();
+            res.json(result);
+        })
+
         // POST API
         app.post('/volunteer', async (req, res) => {
             const volunteer = req.body;
             const result = await volunteerCollection.insertOne(volunteer);
-            console.log(volunteer);
             res.json(result);
-        })
+        });
 
 
     }
